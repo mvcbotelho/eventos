@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import firebase from "../../config/firebase";
 import "firebase/auth";
@@ -28,6 +28,7 @@ function Login() {
 
   return (
     <div className="login-content d-flex align-items-center">
+      {useSelector(state => state.userStatus) > 0 ? <Redirect to="/" /> : null}
       <form className="form-signin mx-auto">
         <div className="text-center mb-4">
           <img
