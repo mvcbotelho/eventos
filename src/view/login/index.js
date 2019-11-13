@@ -31,13 +31,7 @@ function Login() {
       {useSelector(state => state.userStatus) > 0 ? <Redirect to="/" /> : null}
       <form className="form-signin mx-auto">
         <div className="text-center mb-4">
-          <img
-            className="mb-4"
-            src="/docs/4.3/assets/brand/bootstrap-solid.svg"
-            alt=""
-            width="72"
-            height="72"
-          />
+          <i className="fas fa-calendar-check text-white fa-5x my-3"></i>
           <h1 className="h3 mb-3 font-weight-normal text-white font-weight-bold">
             Login
           </h1>
@@ -77,9 +71,9 @@ function Login() {
           )}
         </div>
         <div className="opcao-login mt-5">
-          <a href="#" className="mx-2">
+          <Link to="recover-password" className="mx-2">
             Esqueci minha senha
-          </a>
+          </Link>
           <Link to="newuser" className="mx-2">
             Quero me cadastrar
           </Link>

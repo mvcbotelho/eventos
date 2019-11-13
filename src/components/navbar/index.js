@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./styles.css";
 
 function NavBar() {
+  const dispatch = useDispatch();
+
   return (
     <nav className="navbar navbar-expand-lg">
-      <span className="navbar-brand text-white font-weight-bold">Eventos</span>
+      <i className="fas fa-calendar-check text-white fa-2x mx-2"></i>
       <button
         className="navbar-toggler"
         type="button"
@@ -25,16 +28,44 @@ function NavBar() {
               Home
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="newuser">
-              Cadastrar
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="login">
-              Login
-            </Link>
-          </li>
+          {useSelector(state => state.userStatus) > 0 ? (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="newuser">
+                  Meus Eventos
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="login">
+                  Cadastrar Evento
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  onClick={() => dispatch({ type: "LOG_OUT" })}
+                >
+                  Sair
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="newuser">
+                  Cadastrar
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="login">
+                  Login
+                </Link>
+              </li>
+            </>
+          )}
+          {/* Usuário não logado */}
+
+          {/* Usuário logado */}
         </ul>
       </div>
     </nav>
