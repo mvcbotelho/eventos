@@ -4,7 +4,7 @@ import firebase from "../../config/firebase";
 
 import "./styles.css";
 
-function EventCard({ key, image, title, description, views }) {
+function EventCard({ image, title, description, views }) {
   const [urlImage, setUrlImage] = useState();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ function EventCard({ key, image, title, description, views }) {
       .ref(`images/${image}`)
       .getDownloadURL()
       .then(url => setUrlImage(url));
-  });
+  }, [image, urlImage]);
   return (
     <div className="col-md-3 col-sm-12">
       <img

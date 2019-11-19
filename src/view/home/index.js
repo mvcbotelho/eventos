@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import firebase from "../../config/firebase";
 
 // import "./styles.css";
@@ -9,6 +8,8 @@ import CardEvent from "../../components/cardEvent/";
 
 function Home() {
   const [eventos, setEventos] = useState([]);
+  const [search, setSearch] = useState("");
+
   let listaEventos = [];
 
   useEffect(() => {
@@ -18,27 +19,39 @@ function Home() {
       .get()
       .then(async res => {
         await res.docs.forEach(doc => {
-          listaEventos.push({
-            id: doc.id,
-            ...doc.data()
-          });
+          if (doc.data().title.indexOf(search) >= 0) {
+            listaEventos.push({
+              id: doc.id,
+              ...doc.data()
+            });
+          }
         });
         setEventos(listaEventos);
-      })
-      .catch();
-  });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
   return (
     <>
       <NavBar />
-      {useSelector(state => state.userStatus) > 0 ? <h1>logado</h1> : null}
+      <div className="row p-4">
+        <input
+          onChange={e => {
+            setSearch(e.target.value);
+          }}
+          type="text"
+          className="form-control text-center"
+          placeholder="Buscar Evento"
+        />
+      </div>
       <div className="row p-3">
-        {eventos.map(item => (
+        {eventos.map(evento => (
           <CardEvent
-            key={item.id}
-            image={item.image}
-            title={item.title}
-            description={item.description}
-            views={item.views}
+            key={evento.id}
+            image={evento.image}
+            title={evento.title}
+            description={evento.description}
+            views={evento.views}
           />
         ))}
       </div>
