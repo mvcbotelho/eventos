@@ -1,0 +1,25 @@
+.base-card {
+  color: #614ea6;
+  height: 35px;
+}
+
+.btn-detail {
+  background-color: #614ea6;
+  color: #ffffff;
+}
+
+.btn-detail:hover {
+  background-color: #f21667;
+  color: #ffffff;
+}
+
+.card-text {
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.card-img {
+  min-height: 100px;
+  max-height: 100px;
+  min-width: 100%;
+}
