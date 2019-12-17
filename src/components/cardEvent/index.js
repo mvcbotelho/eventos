@@ -4,8 +4,10 @@ import firebase from "../../config/firebase";
 
 import "./styles.css";
 
-function EventCard({ image, title, description, views }) {
+function EventCard({ id, image, title, description, views }) {
   const [urlImage, setUrlImage] = useState();
+
+  // console.log(id, image, title, description, views);
 
   useEffect(() => {
     firebase
@@ -14,6 +16,7 @@ function EventCard({ image, title, description, views }) {
       .getDownloadURL()
       .then(url => setUrlImage(url));
   }, [image, urlImage]);
+
   return (
     <div className="col-md-3 col-sm-12">
       <img
@@ -26,7 +29,7 @@ function EventCard({ image, title, description, views }) {
         <p className="card-text text-justify">{description}</p>
         <div className="row base-card d-flex align-items-center">
           <div className="col-6">
-            <Link to="" className="btn btn-sm btn-detail">
+            <Link to={`/event-detail/${id}`} className="btn btn-sm btn-detail">
               + Detalhes
             </Link>
           </div>

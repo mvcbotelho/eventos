@@ -70,6 +70,7 @@ function Home({ match }) {
         {eventos.map(evento => (
           <CardEvent
             key={evento.id}
+            id={evento.id}
             image={evento.image}
             title={evento.title}
             description={evento.description}
